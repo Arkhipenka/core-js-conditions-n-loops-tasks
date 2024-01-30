@@ -62,8 +62,12 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  return (
+    queen.x === king.x ||
+    queen.y === king.y ||
+    Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y)
+  );
 }
 
 /**
@@ -84,8 +88,10 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (!(a + b > c && a + c > b && a + c > b)) return false;
+
+  return a === b || b === c || c === a;
 }
 
 /**
@@ -102,8 +108,38 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let tempNum = num;
+  let result = ``;
+
+  if (tempNum >= 10) {
+    const x = Math.floor(num / 10);
+    tempNum %= 10;
+    for (let i = 1; i <= x; i += 1) {
+      result += 'X';
+    }
+  }
+
+  if (tempNum === 9) {
+    result += 'IX';
+    return result;
+  }
+
+  if (tempNum >= 5) {
+    tempNum %= 5;
+    result += 'V';
+  }
+
+  if (tempNum === 4) {
+    result += 'IV';
+    return result;
+  }
+
+  for (let i = 1; i <= tempNum; i += 1) {
+    result += 'I';
+  }
+
+  return result;
 }
 
 /**
